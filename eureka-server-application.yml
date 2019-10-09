@@ -1,0 +1,35 @@
+spring:
+  profiles:
+    active: test
+---
+server:
+  port: 8761   # eureka默认端口
+spring:
+  application:
+    profiles: test
+    name: eureka-server
+eureka:
+  client:
+    register-with-eureka: false # eureka可以注册其他微服务，但它本身就是个微服务，大多情况下不需注册自己
+    fetch-registry: true # 是否获取其他eureka数据（之后需要同步）
+    service-url:
+        defaultZone: http://localhost:8761/eureka
+  server:
+    enable-self-preservation: false # 自我保护模式(测试时关闭;生产中一定要打开)
+    eviction-interval-timer-in-ms: 10000 #清除无效节点的时间间隔(毫秒)默认1分钟
+---
+server:
+  port: 8761   # eureka默认端口
+spring:
+  application:
+    profiles: dev
+    name: eureka-server
+eureka:
+  client:
+    register-with-eureka: false # eureka可以注册其他微服务，但它本身就是个微服务，大多情况下不需注册自己
+    fetch-registry: true # 是否获取其他eureka数据（之后需要同步）
+    service-url:
+        defaultZone: http://localhost:8761/eureka
+  server:
+    enable-self-preservation: false # 自我保护模式(测试时关闭;生产中一定要打开)
+    eviction-interval-timer-in-ms: 10000 #清除无效节点的时间间隔(毫秒)默认1分钟
